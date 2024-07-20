@@ -1,1 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
+
+@import 'toastr.css';
+
+:root {
+    --my-color: rgb(255, 115, 0);
+  }
+
+:root {
+    --my-color-white: rgb(255, 255, 255);
+  }
+
+.pf-regular{
+    font-family: "Red Hat Display", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 350;
+    font-style: normal;
+  }
+
+.pf-bold{
+    font-family: "Red Hat Display", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+  }
+
+.bg-my-color {
+    background-color: var(--my-color);
+  }
+
+.bg-my-color-white {
+    background-color: var(--my-color-white);
+  }

@@ -1,3 +1,50 @@
-<nav>
+<!-- <nav>
     <a routerLink="/inicio">Inicio</a> | <a routerLink="/productos">Productos</a> | <a routerLink="/servicios">Servicios</a> | <a routerLink="/nosotros">Nosotros</a> | <a routerLink="/contacto">Contacto</a> |  <a routerLink="/registrarse">Registrarse</a> |  <a routerLink="/iniciar-sesion">Iniciar Sesión</a> | <a routerLink="/privado">Privado</a> | 
+</nav> -->
+
+<nav class="navbar navbar-expand-lg bg-my-color " data-bs-theme="dark">
+  <div class="container">
+    <div>
+      <a class="navbar-brand nav-link" href="#" routerLink="inicio"
+        ><img
+          src="../../../assets/icono-p.jpg"
+          class="navbar-brand"
+          alt="icono-venequiposdata"
+          width="120"
+          height="50"
+          style="border-radius: 10px; overflow: hidden"
+      /></a>
+    </div>
+    <div>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a routerLink="/inicio" class="nav-link">Inicio</a>
+          <div class="pe-3 text-white">
+            @if (loginService.isLogin()) {
+            <button
+              type="button"
+              class="btn"
+              (click)="loginService.logout()"
+            >
+              Logout
+            </button>
+            } @else {
+            <a routerLink="iniciar-sesion" class="nav-link">Login</a>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </nav>

@@ -1,23 +1,51 @@
 import { Routes } from '@angular/router';
+import { activateGuard } from './guards/active.guard';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { ProductosComponent } from './components/productos/productos.component';
-import { ServiciosComponent } from './components/servicios/servicios.component';
+import { AdminOrdenesComponent } from './components/admin-ordenes/admin-ordenes.component';
 import { NosotrosComponent } from './components/nosotros/nosotros.component';
-import { ContactoComponent } from './components/contacto/contacto.component';
 import { RegistrarseComponent } from './components/registrarse/registrarse.component';
 import { IniciarSesionComponent } from './components/iniciar-sesion/iniciar-sesion.component';
 import { PrivadoComponent } from './components/privado/privado.component';
-import { NoEncontradoComponent } from "./components/no-encontrado/no-encontrado.component";
+import { NoEncontradoComponent } from './components/no-encontrado/no-encontrado.component';
+import { AdminUsersComponent } from './components/admin-users/admin-users.component';
 
 export const routes: Routes = [
-    {path: "inicio", component: InicioComponent , title: "Inicio"},
-    {path: "productos", component: ProductosComponent , title: "Productos"},
-    {path: "servicios", component: ServiciosComponent , title: "Servicios"},
-    {path: "nosotros", component: NosotrosComponent , title: "Nosotros"},
-    {path: "contacto", component: ContactoComponent , title: "Contacto"},
-    {path: "registrarse", component: RegistrarseComponent , title: "Registrarse"},
-    {path: "iniciar-sesion", component: IniciarSesionComponent , title: "Inciar Sesión"},
-    {path: "privado", component: PrivadoComponent , title: "Privado"},
-    {path: "", redirectTo: "inicio", pathMatch: "full" , title: "Inicio"},
-    {path: "**", component: NoEncontradoComponent, title: "404"}
+  {
+    path: 'inicio',
+    component: InicioComponent,
+    title: 'Inicio',
+    canActivate: [activateGuard],
+  },
+  { path: 'productos', component: ProductosComponent, title: 'Productos' },
+  {
+    path: 'administradorOrdenes',
+    component: AdminOrdenesComponent,
+    title: 'Administrador Ordenes',
+  },
+  { path: 'nosotros', component: NosotrosComponent, title: 'Nosotros' },
+  {
+    path: 'registrarse',
+    component: RegistrarseComponent,
+    title: 'Registrarse',
+  },
+  {
+    path: 'iniciar-sesion',
+    component: IniciarSesionComponent,
+    title: 'Inciar Sesión',
+  },
+  {
+    path: 'administradorUsuario',
+    component: AdminUsersComponent,
+    title: 'Administrar Usuario',
+    canActivate: [activateGuard],
+  },
+  {
+    path: 'privado',
+    component: PrivadoComponent,
+    title: 'Privado',
+    canActivate: [activateGuard],
+  },
+  { path: '', redirectTo: 'inicio', pathMatch: 'full', title: 'Inicio' },
+  { path: '**', component: NoEncontradoComponent, title: '404' },
 ];

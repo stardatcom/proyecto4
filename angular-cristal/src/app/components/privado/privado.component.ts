@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
-
-const jwtHelperService = new JwtHelperService();
+import { Component, inject } from '@angular/core';
+import { LoginService } from '../../services/login.service.service';
 
 @Component({
   selector: 'app-privado',
@@ -11,12 +9,24 @@ const jwtHelperService = new JwtHelperService();
   styleUrl: './privado.component.css'
 })
 export class PrivadoComponent {
+  loginService = inject(LoginService);
+
   nombre: string = '';
   ngOnInit() {
     const token: any = localStorage.getItem('token');
-    console.log('token: ', token);
-    const decoded = jwtHelperService.decodeToken(token);
-    console.log('decoded: ', decoded);
-    this.nombre = decoded.nombre;
+    //console.log('token: ', token);
+    if (token) {
+      this.loginService.validateToken(token).subscribe((res: any) => {
+        //console.log('respuesta: ', res);
+        if (res.resultado === 'bien') {
+          this.nombre = res.datos.nombre;
+        } else {
+          //console.log('el token no es válido...');
+          this.loginService.logout();
+        }
+      });
+    } else {
+      this.loginService.logout();
+    }
   }
 }

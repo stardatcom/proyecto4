@@ -1,10 +1,43 @@
-<p>iniciar-sesion works!</p>
-<section>
-    <h1>Bienvenido</h1>
-    <p>Ingrese sus credenciales.</p>
-    <form [formGroup]="formularioCredenciales" (ngSubmit)="manejarEnvio()">
-        <input type="text" placeholder="usuario" formControlName="usuario">
-        <input type="password" placeholder="contraseña" formControlName="contrasenia">
-        <button>Iniciar sesión</button>
-    </form>
+<section
+  class="d-flex justify-content-center align-items-center align-self-center mt-5"
+>
+  <div class="card" style="width: 50%; height: auto">
+    <div class="card-body">
+      <h1 class="text-center">Bienvenido</h1>
+      <p class="text-center">Ingrese sus credenciales.</p>
+      <form [formGroup]="formularioCredenciales" (ngSubmit)="manejarEnvio()">
+        <div class="row">
+          <div class="col">
+            <label for="usuario">Usuario</label>
+            <input
+              type="text"
+              placeholder="ejemplo@venequipos.com"
+              formControlName="usuario"
+              class="form-control"
+              id="usuario"
+            />
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col">
+            <label for="psw">Contraseña</label>
+            <input
+              type="password"
+              placeholder="• • • • • • • •"
+              formControlName="contrasenia"
+              class="form-control"
+              is="psw"
+            />
+          </div>
+        </div>
+        <div
+          class="row d-flex justify-content-center align-items-center align-self-center mt-2"
+        >
+          <div class="col d-grid gap-2">
+            <button class="btn bg-my-color">Iniciar sesión</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </section>

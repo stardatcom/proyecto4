@@ -1,0 +1,191 @@
+<div class="container">
+  <div class="row my-3">
+    <div class="col d-flex flex-row-reverse">
+      <button
+        type="button"
+        class="btn bg-my-color"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        (click)="setValoresModal(true)"
+      >
+        Crear usuario
+      </button>
+    </div>
+  </div>
+
+  <div class="row ">
+    <div class="">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (usuario of listaUsuario; track usuario._id){
+          <tr>
+            <td>{{ usuario.nombre }}</td>
+            <td>{{ usuario.email}}</td>
+            <td>{{ usuario.rolID }}</td>
+            <td *ngIf="usuario.estado ">Activo</td>
+            <td *ngIf="!usuario.estado ">Desactivado</td>
+            <td>
+              <button
+                type="button"
+                class="btn bg-my-color"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+                (click)="setValoresModal(false, usuario)"
+              >
+                <i class="bi bi-pencil-square"></i>
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1
+          class="modal-title fs-5"
+          id="exampleModalLabel"
+          *ngIf="nuevoUsuario"
+        >
+          Crear Usuario
+        </h1>
+        <h1
+          class="modal-title fs-5"
+          id="exampleModalLabel"
+          *ngIf="!nuevoUsuario"
+        >
+          Actualiza Usuario
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form [formGroup]="formulario" (ngSubmit)="obtenerFormulario()">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <label for="Nombre" class="form-label">Nombre</label>
+              <input
+                type="text"
+                label="Nombre"
+                class="form-control"
+                formControlName="nombre"
+                [ngClass]="{
+                  'is-invalid':
+                    formularioEnviado && validacionFormulario['nombre'].errors,
+                  'is-valid':
+                    formularioEnviado && !validacionFormulario['nombre'].errors
+                }"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="Correo" class="form-label">Correo Electronico</label>
+              <input
+                type="email"
+                label="Correo"
+                class="form-control"
+                formControlName="email"
+                [ngClass]="{
+                  'is-invalid':
+                    formularioEnviado && validacionFormulario['email'].errors,
+                  'is-valid':
+                    formularioEnviado && !validacionFormulario['email'].errors
+                }"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="Contraseña" class="form-label">Contraseña</label>
+              <input
+                type="password"
+                label="Contraseña"
+                class="form-control"
+                formControlName="contrasenia"
+                [ngClass]="{
+                  'is-invalid':
+                    formularioEnviado &&
+                    validacionFormulario['contrasenia'].errors,
+                  'is-valid':
+                    formularioEnviado &&
+                    !validacionFormulario['contrasenia'].errors
+                }"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="Rol" class="form-label">Rol del usuario</label>
+              <input
+                type="text"
+                label="Rol"
+                class="form-control"
+                formControlName="rol"
+                [ngClass]="{
+                  'is-invalid':
+                    formularioEnviado && validacionFormulario['rol'].errors,
+                  'is-valid':
+                    formularioEnviado && !validacionFormulario['rol'].errors
+                }"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="Estado" class="form-check-label">Estado</label>
+              <input
+                type="checkbox"
+                label="Estado"
+                class="form-check-input"
+                formControlName="estado"
+                [ngClass]="{
+                  'is-invalid':
+                    formularioEnviado && validacionFormulario['estado'].errors,
+                  'is-valid':
+                    formularioEnviado && !validacionFormulario['estado'].errors
+                }"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+            id="cerrarModal"
+          >
+            Cerrar
+          </button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

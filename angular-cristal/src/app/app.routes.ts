@@ -16,6 +16,7 @@ export const routes: Routes = [
     component: InicioComponent,
     title: 'Inicio',
     canActivate: [activateGuard],
+    
   },
   { path: 'productos', component: ProductosComponent, title: 'Productos' },
   {
@@ -46,6 +47,6 @@ export const routes: Routes = [
     title: 'Privado',
     canActivate: [activateGuard],
   },
-  { path: '', redirectTo: 'inicio', pathMatch: 'full', title: 'Inicio' },
+  { path: '', redirectTo: 'iniciar-sesion', pathMatch: 'full', title: 'Inicio' },
   { path: '**', component: NoEncontradoComponent, title: '404' },
 ];

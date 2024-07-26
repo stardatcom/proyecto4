@@ -9,7 +9,7 @@ export const activateGuard: CanActivateFn = (route, state) => {
   if (loginService.isLogin()) {
     return true;
   } else {
-    router.navigateByUrl('/inicio');
+    router.navigateByUrl('/iniciar-sesion');
     return false;
   }
 };

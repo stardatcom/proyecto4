@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Usuario } from '../../modelos/usuario';
 import { ListaUsuarioService } from '../../services/lista-usuario.service';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,7 @@ import {
   FormControlName,
   AbstractControl,
 } from '@angular/forms';
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-admin-users',
@@ -25,6 +26,8 @@ export class AdminUsersComponent {
   formularioEnviado: boolean = false;
   nuevoUsuario: boolean = true;
   tiposRol:string[]=["Admin","Colaborador"]
+  
+  toastrService = inject(ToastrService);
 
   constructor(private usuarioServicio: ListaUsuarioService) {}
 
@@ -88,6 +91,9 @@ export class AdminUsersComponent {
           }
           this.obtenerListaUsuario();
           this.cerrarModal();
+          this.toastrService.success('Usuario creado.', '', {
+            positionClass: 'toast-bottom-center',
+          });
         }
       })
       .catch((error) => {
@@ -122,6 +128,9 @@ export class AdminUsersComponent {
             return;
           }
           this.cerrarModal();
+          this.toastrService.success('Usuario actualizado.', '', {
+            positionClass: 'toast-bottom-center',
+          });
         }
       })
       .catch((error) => {

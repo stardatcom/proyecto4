@@ -1,208 +1,221 @@
-<div class="background-sesion"><section>
-<div class="container">
-  <div class="row">
-    <div class="col d-flex flex-row-reverse my-3">
-      <button
-        type="button"
-        class="btn bg-my-color"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-        (click)="obtenerListas()"
-      >
-        Nueva Orden
-      </button>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Descripción</th>
-            <th>Fecha</th>
-            <th>Usuario</th>
-            <th *ngIf="rol"></th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (ordenes of listaOrdenes; track ordenes.ID){
-          <tr>
-            <td>{{ ordenes.ID }}</td>
-            <td>{{ ordenes.descripcion }}</td>
-            <td>{{ ordenes.fecha }}</td>
-            <td>{{ ordenes.IDusuario }}</td>
-            <td *ngIf="rol">
-              <button
-                type="button"
-                class="btn bg-my-color"
-                data-bs-target="#exampleModal"
-                (click)="eliminarOrden(ordenes._id)"
-              >
-                <i class="bi bi-trash3"></i>
-              </button>
-            </td>
-          </tr>
-          }
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- Modal -->
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">
-          Crear Orden de Trabajo
-        </h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <form [formGroup]="formulario" (ngSubmit)="obtenerFormulario()">
-        <div class="modal-body">
-          <div class="row">
-            <div class="col">
-              <label for="ID" class="form-label">ID de la Orden</label>
-              <input
-                type="text"
-                label="ID"
-                class="form-control"
-                formControlName="ID"
-                [ngClass]="{
-                  'is-invalid':
-                    formularioEnviado && validacionFormulario['ID'].errors,
-                  'is-valid':
-                    formularioEnviado && !validacionFormulario['ID'].errors
-                }"
-              />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <label for="descripcion" class="form-label">Descripción</label>
-              <input
-                type="text"
-                label="descripcion"
-                class="form-control"
-                formControlName="descripcion"
-                [ngClass]="{
-                  'is-invalid':
-                    formularioEnviado &&
-                    validacionFormulario['descripcion'].errors,
-                  'is-valid':
-                    formularioEnviado &&
-                    !validacionFormulario['descripcion'].errors
-                }"
-              />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <label for="lHerramienta" class="form-label"
-                >Lista de Herramientas</label
-              >
-              <input
-                type="text"
-                label="lHerramienta"
-                class="form-control"
-                formControlName="lHerramienta"
-                [ngClass]="{
-                  'is-invalid':
-                    formularioEnviado &&
-                    validacionFormulario['lHerramienta'].errors,
-                  'is-valid':
-                    formularioEnviado &&
-                    !validacionFormulario['lHerramienta'].errors
-                }"
-              />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <label for="lBodega" class="form-label"
-                >Elementos de Bodega</label
-              >
-              <input
-                type="text"
-                label="lBodega"
-                class="form-control"
-                formControlName="lBodega"
-                [ngClass]="{
-                  'is-invalid':
-                    formularioEnviado && validacionFormulario['lBodega'].errors,
-                  'is-valid':
-                    formularioEnviado && !validacionFormulario['lBodega'].errors
-                }"
-              />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <label for="fecha" class="form-label">Fecha</label>
-              <input
-                type="date"
-                label="fecha"
-                class="form-control"
-                formControlName="fecha"
-                [ngClass]="{
-                  'is-invalid':
-                    formularioEnviado && validacionFormulario['fecha'].errors,
-                  'is-valid':
-                    formularioEnviado && !validacionFormulario['fecha'].errors
-                }"
-              />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <label for="usuario" class="form-label">Usuario Asignado</label>
-
-              <select
-                name=""
-                id=""
-                class="form-select"
-                aria-label="usuario"
-                formControlName="usuario"
-                [ngClass]="{
-                  'is-invalid':
-                    formularioEnviado && validacionFormulario['usuario'].errors,
-                  'is-valid':
-                    formularioEnviado && !validacionFormulario['usuario'].errors
-                }"
-              >
-                @for (item of listaUsuario; track item) {
-                <option [value]="item.nombre">{{ item.nombre }}</option>
-                }
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
+<div class="background-sesion">
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col d-flex flex-row-reverse my-3">
           <button
             type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-            id="cerrarModal"
+            class="btn bg-my-color"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            (click)="obtenerListas()"
           >
-            Cerrar
+            Nueva Orden
           </button>
-          <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
-      </form>
+      </div>
+
+      <div class="row">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Descripción</th>
+                <th>Fecha</th>
+                <th>Usuario</th>
+                <th *ngIf="rol"></th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (ordenes of listaOrdenes; track ordenes.ID){
+              <tr>
+                <td>{{ ordenes.ID }}</td>
+                <td>{{ ordenes.descripcion }}</td>
+                <td>{{ ordenes.fecha | date : "mediumDate" }}</td>
+                <td>{{ ordenes.IDusuario }}</td>
+                <td *ngIf="rol">
+                  <button
+                    type="button"
+                    class="btn bg-my-color"
+                    data-bs-target="#exampleModal"
+                    (click)="eliminarOrden(ordenes._id)"
+                  >
+                    <i class="bi bi-trash3"></i>
+                  </button>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-  </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Crear Orden de Trabajo
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <form [formGroup]="formulario" (ngSubmit)="obtenerFormulario()">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col">
+                  <label for="ID" class="form-label">ID de la Orden</label>
+                  <input
+                    type="text"
+                    label="ID"
+                    class="form-control"
+                    formControlName="ID"
+                    [ngClass]="{
+                      'is-invalid':
+                        formularioEnviado && validacionFormulario['ID'].errors,
+                      'is-valid':
+                        formularioEnviado && !validacionFormulario['ID'].errors
+                    }"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label for="descripcion" class="form-label"
+                    >Descripción</label
+                  >
+                  <input
+                    type="text"
+                    label="descripcion"
+                    class="form-control"
+                    formControlName="descripcion"
+                    [ngClass]="{
+                      'is-invalid':
+                        formularioEnviado &&
+                        validacionFormulario['descripcion'].errors,
+                      'is-valid':
+                        formularioEnviado &&
+                        !validacionFormulario['descripcion'].errors
+                    }"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label for="lHerramienta" class="form-label"
+                    >Lista de Herramientas</label
+                  >
+                  <input
+                    type="text"
+                    label="lHerramienta"
+                    class="form-control"
+                    formControlName="lHerramienta"
+                    [ngClass]="{
+                      'is-invalid':
+                        formularioEnviado &&
+                        validacionFormulario['lHerramienta'].errors,
+                      'is-valid':
+                        formularioEnviado &&
+                        !validacionFormulario['lHerramienta'].errors
+                    }"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label for="lBodega" class="form-label"
+                    >Elementos de Bodega</label
+                  >
+                  <input
+                    type="text"
+                    label="lBodega"
+                    class="form-control"
+                    formControlName="lBodega"
+                    [ngClass]="{
+                      'is-invalid':
+                        formularioEnviado &&
+                        validacionFormulario['lBodega'].errors,
+                      'is-valid':
+                        formularioEnviado &&
+                        !validacionFormulario['lBodega'].errors
+                    }"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label for="fecha" class="form-label">Fecha</label>
+                  <input
+                    type="date"
+                    label="fecha"
+                    class="form-control"
+                    formControlName="fecha"
+                    [ngClass]="{
+                      'is-invalid':
+                        formularioEnviado &&
+                        validacionFormulario['fecha'].errors,
+                      'is-valid':
+                        formularioEnviado &&
+                        !validacionFormulario['fecha'].errors
+                    }"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label for="usuario" class="form-label"
+                    >Usuario Asignado</label
+                  >
+
+                  <select
+                    name=""
+                    id=""
+                    class="form-select"
+                    aria-label="usuario"
+                    formControlName="usuario"
+                    [ngClass]="{
+                      'is-invalid':
+                        formularioEnviado &&
+                        validacionFormulario['usuario'].errors,
+                      'is-valid':
+                        formularioEnviado &&
+                        !validacionFormulario['usuario'].errors
+                    }"
+                  >
+                    @for (item of listaUsuario; track item) {
+                    <option [value]="item.nombre">{{ item.nombre }}</option>
+                    }
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+                id="cerrarModal"
+              >
+                Cerrar
+              </button>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>

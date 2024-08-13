@@ -44,12 +44,16 @@ export class IniciarSesionComponent {
             this.cerrarModal()
             this.router.navigateByUrl('/inicio');
           } else {
-            this.toastrService.warning('Invalid credentials');
+            this.toastrService.error('Credenciales invalidas.', '', {
+              positionClass: 'toast-bottom-center',
+            });
           }
         });
       }
     } else {
-      this.toastrService.warning('All fields are required');
+      this.toastrService.warning('Campos vacios, por favor llenar.', '', {
+        positionClass: 'toast-bottom-center',
+      });
     }
   }
 

@@ -33,11 +33,18 @@ export class LoginService {
   }
 
   logout() {
-    this.toastrService.success('Bye!', '', {
-      positionClass: 'toast-bottom-center',
-    });
+    let confirmation = confirm("¿Desea cerrar sesión?");
+    if (confirmation) {
     localStorage.removeItem('token');
     this.router.navigate(['/iniciar-sesion']);
+    this.toastrService.success('¡Hasta luego!', '', {
+      positionClass: 'toast-bottom-center',
+    });
+  } else {
+    this.toastrService.info('NO ha CERRADO sesión.', '', {
+      positionClass: 'toast-bottom-center',
+    });
+  }
   }
 
   getRol(): string {

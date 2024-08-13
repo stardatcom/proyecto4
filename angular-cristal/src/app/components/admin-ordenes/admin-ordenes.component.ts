@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { OrdenDeTrabajo } from '../../modelos/ordenDeTrabajo';
 import { ListaOrdenesService } from '../../services/lista-ordenes.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import {
   FormsModule,
   ReactiveFormsModule,
@@ -14,16 +14,20 @@ import {
 import { LoginService } from '../../services/login.service.service';
 import { ListaUsuarioService } from '../../services/lista-usuario.service';
 import { Usuario } from '../../modelos/usuario';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-admin-ordenes',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, DatePipe, FormsModule, ReactiveFormsModule],
   templateUrl: './admin-ordenes.component.html',
   styleUrl: './admin-ordenes.component.css',
   providers: [LoginService],
 })
 export class AdminOrdenesComponent {
+
+  toastrService = inject(ToastrService);
+  
   listaOrdenes: OrdenDeTrabajo[] = [];
   formulario: FormGroup = new FormGroup({});
   formularioEnviado: boolean = false;
@@ -94,6 +98,9 @@ export class AdminOrdenesComponent {
           this.obtenerListaOrdenes();
           this.cerrarModal();
         }
+        this.toastrService.success('Orden creada.', '', {
+          positionClass: 'toast-bottom-center',
+        });
       })
       .catch((error) => {
         console.log('error ', error);
@@ -110,10 +117,20 @@ export class AdminOrdenesComponent {
   }
 
   async eliminarOrden(ordenID: string) {
+    let confirmation = confirm("¿Desea ELIMINAR la orden definitivamente?");
+    if (confirmation) {
     await this.ordenesServicio.deleteOrden(ordenID).then((resp) => {
       console.log(resp);
     });
     this.obtenerListaOrdenes();
+    this.toastrService.success('Orden eliminada.', '', {
+      positionClass: 'toast-bottom-center',
+    });
+  } else {
+    this.toastrService.info('NO se ha ELIMINADO la orden.', '', {
+      positionClass: 'toast-bottom-center',
+    });
+  }
   }
 
   obtenerListas() {

@@ -1,43 +1,90 @@
-<section
-  class="d-flex justify-content-center align-items-center align-self-center mt-5"
->
-  <div class="card" style="width: 50%; height: auto">
-    <div class="card-body">
-      <h1 class="text-center">Bienvenido</h1>
-      <p class="text-center">Ingrese sus credenciales.</p>
-      <form [formGroup]="formularioCredenciales" (ngSubmit)="manejarEnvio()">
-        <div class="row">
-          <div class="col">
-            <label for="usuario">Usuario</label>
-            <input
-              type="text"
-              placeholder="ejemplo@venequipos.com"
-              formControlName="usuario"
-              class="form-control"
-              id="usuario"
-            />
-          </div>
+<div class="background-sesion">
+  <section class="">
+    <div
+      class="row d-flex justify-content-center align-items-center align-self-center pt-5"
+    >
+      <div class="col-8">
+        <div class="card-glassmorphism">
+          <h2>Bienvenido,</h2>
+          <h1 class="text-center">Hola Colaborador</h1>
+          <p class="d-flex justify-content-end">
+            Muchas Gracias por tu compromiso y ayuda.
+          </p>
         </div>
-        <div class="row mt-1">
-          <div class="col">
-            <label for="psw">Contraseña</label>
-            <input
-              type="password"
-              placeholder="• • • • • • • •"
-              formControlName="contrasenia"
-              class="form-control"
-              is="psw"
-            />
-          </div>
-        </div>
-        <div
-          class="row d-flex justify-content-center align-items-center align-self-center mt-2"
+      </div>
+    </div>
+    <div class="row pt-5">
+      <div
+        class="col d-flex justify-content-center align-items-center align-self-center"
+      >
+        <button
+          class="btn bg-my-color"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#card"
         >
-          <div class="col d-grid gap-2">
-            <button class="btn bg-my-color">Iniciar sesión</button>
+          Iniciar sesión
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div
+  class="modal fade"
+  id="card"
+  tabindex="-1"
+  aria-labelledby="card"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="cerrarModal"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <h1 class="text-center">Bienvenido</h1>
+        <p class="text-center">Ingrese sus credenciales.</p>
+        <form [formGroup]="formularioCredenciales" (ngSubmit)="manejarEnvio()">
+          <div class="row">
+            <div class="col">
+              <label for="usuario">Usuario</label>
+              <input
+                type="text"
+                placeholder="ejemplo@venequipos.com"
+                formControlName="usuario"
+                class="form-control"
+                id="usuario"
+              />
+            </div>
           </div>
-        </div>
-      </form>
+          <div class="row mt-1">
+            <div class="col">
+              <label for="psw">Contraseña</label>
+              <input
+                type="password"
+                placeholder="• • • • • • • •"
+                formControlName="contrasenia"
+                class="form-control"
+                is="psw"
+              />
+            </div>
+          </div>
+          <div
+            class="row d-flex justify-content-center align-items-center align-self-center mt-2"
+          >
+            <div class="col d-grid gap-2">
+              <button class="btn bg-my-color">Iniciar sesión</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</section>
+</div>

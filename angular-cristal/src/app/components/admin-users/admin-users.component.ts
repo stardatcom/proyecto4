@@ -24,6 +24,7 @@ export class AdminUsersComponent {
   formulario: FormGroup = new FormGroup({});
   formularioEnviado: boolean = false;
   nuevoUsuario: boolean = true;
+  tiposRol:string[]=["Admin","Colaborador"]
 
   constructor(private usuarioServicio: ListaUsuarioService) {}
 
@@ -75,6 +76,8 @@ export class AdminUsersComponent {
     usuario.contrasenia = this.formulario.get('contrasenia')?.value;
     usuario.rolID = this.formulario.get('rol')?.value;
     usuario.estado = this.formulario.get('estado')?.value;
+    usuario.ID = usuario.nombre + ' ' + usuario.email;
+    debugger;
     await this.usuarioServicio
       .crearUsuario(usuario)
       .then((resp: any) => {
@@ -83,6 +86,7 @@ export class AdminUsersComponent {
           if (resp.resultado == 'mal') {
             return;
           }
+          this.obtenerListaUsuario();
           this.cerrarModal();
         }
       })

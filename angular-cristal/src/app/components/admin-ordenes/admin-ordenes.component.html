@@ -1,3 +1,4 @@
+<div class="background-sesion"><section>
 <div class="container">
   <div class="row my-3">
     <div class="col d-flex flex-row-reverse">
@@ -6,6 +7,7 @@
         class="btn bg-my-color"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
+        (click)="obtenerListas()"
       >
         Nueva Orden
       </button>
@@ -13,7 +15,7 @@
   </div>
 
   <div class="row">
-    <div class="">
+    <div class="table-responsive">
       <table class="table table-striped">
         <thead>
           <tr>
@@ -21,6 +23,7 @@
             <th>Descripción</th>
             <th>Fecha</th>
             <th>Usuario</th>
+            <th *ngIf="rol"></th>
           </tr>
         </thead>
         <tbody>
@@ -30,7 +33,7 @@
             <td>{{ ordenes.descripcion }}</td>
             <td>{{ ordenes.fecha }}</td>
             <td>{{ ordenes.IDusuario }}</td>
-            <td>
+            <td *ngIf="rol">
               <button
                 type="button"
                 class="btn bg-my-color"
@@ -166,11 +169,13 @@
           </div>
           <div class="row">
             <div class="col">
-              <label for="usuario" class="form-label">ID del Usuario</label>
-              <input
-                type="text"
-                label="usuario"
-                class="form-control"
+              <label for="usuario" class="form-label">Usuario Asignado</label>
+
+              <select
+                name=""
+                id=""
+                class="form-select"
+                aria-label="usuario"
                 formControlName="usuario"
                 [ngClass]="{
                   'is-invalid':
@@ -178,7 +183,11 @@
                   'is-valid':
                     formularioEnviado && !validacionFormulario['usuario'].errors
                 }"
-              />
+              >
+                @for (item of listaUsuario; track item) {
+                <option [value]="item.nombre">{{ item.nombre }}</option>
+                }
+              </select>
             </div>
           </div>
         </div>
@@ -187,6 +196,7 @@
             type="button"
             class="btn btn-secondary"
             data-bs-dismiss="modal"
+            id="cerrarModal"
           >
             Cerrar
           </button>

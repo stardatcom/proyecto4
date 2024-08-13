@@ -39,7 +39,9 @@ export class IniciarSesionComponent {
         this.loginService.login(credential).subscribe((res: any) => {
           console.log('response: ', res);
           if (res.resultado === 'bien') {
-            localStorage.setItem('token', res.datos.token);
+            localStorage.setItem('token', res.datos.token.token);
+            localStorage.setItem('rol', res.datos.rolID);
+            this.cerrarModal()
             this.router.navigateByUrl('/inicio');
           } else {
             this.toastrService.warning('Invalid credentials');
@@ -49,5 +51,9 @@ export class IniciarSesionComponent {
     } else {
       this.toastrService.warning('All fields are required');
     }
+  }
+
+  cerrarModal() {
+    document.getElementById('cerrarModal')?.click();
   }
 }

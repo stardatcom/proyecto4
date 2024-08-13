@@ -14,7 +14,7 @@ export class LoginService {
 
   constructor(private toastrService: ToastrService) {}
 
-  API_URL = 'http://3.128.184.112:2000/iniciar-sesion';
+  API_URL = 'http://localhost:2000/iniciar-sesion';
 
   login(credential: Credential) {
     return this.httpClient.post(this.API_URL, credential);
@@ -38,5 +38,9 @@ export class LoginService {
     });
     localStorage.removeItem('token');
     this.router.navigate(['/iniciar-sesion']);
+  }
+
+  getRol(): string {
+    return localStorage.getItem('rol') ?? '';
   }
 }

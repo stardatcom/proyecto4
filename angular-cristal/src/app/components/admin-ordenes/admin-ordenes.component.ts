@@ -11,6 +11,9 @@ import {
   FormControlName,
   AbstractControl,
 } from '@angular/forms';
+import { LoginService } from '../../services/login.service.service';
+import { ListaUsuarioService } from '../../services/lista-usuario.service';
+import { Usuario } from '../../modelos/usuario';
 
 @Component({
   selector: 'app-admin-ordenes',
@@ -18,18 +21,28 @@ import {
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './admin-ordenes.component.html',
   styleUrl: './admin-ordenes.component.css',
+  providers: [LoginService],
 })
 export class AdminOrdenesComponent {
   listaOrdenes: OrdenDeTrabajo[] = [];
   formulario: FormGroup = new FormGroup({});
   formularioEnviado: boolean = false;
   nuevaOrden: boolean = true;
+  rol: boolean = false;
+  listaUsuario: Usuario[] = [];
 
-  constructor(private ordenesServicio: ListaOrdenesService) {}
+  constructor(
+    private ordenesServicio: ListaOrdenesService,
+    private loginService: LoginService,
+    private usuarioServicio: ListaUsuarioService
+  ) {}
 
   ngOnInit() {
     this.asignarValorFormulario();
     this.obtenerListaOrdenes();
+    let rol = this.loginService.getRol();
+    this.rol =
+      rol.toLowerCase() == 'admin' || rol.toLowerCase() == 'administrador';
   }
 
   obtenerListaOrdenes() {
@@ -72,12 +85,24 @@ export class AdminOrdenesComponent {
     ordenes.IDusuario = this.formulario.get('usuario')?.value;
     await this.ordenesServicio
       .crearOrden(ordenes)
-      .then((resp) => {
+      .then((resp: any) => {
         console.log(resp);
+        if (resp) {
+          if (resp.resultado == 'mal') {
+            return;
+          }
+          this.obtenerListaOrdenes();
+          this.cerrarModal();
+        }
       })
       .catch((error) => {
         console.log('error ', error);
       });
+  }
+
+  cerrarModal() {
+    document.getElementById('cerrarModal')?.click();
+    this.formularioEnviado = false;
   }
 
   get validacionFormulario(): { [key: string]: AbstractControl } {
@@ -89,5 +114,17 @@ export class AdminOrdenesComponent {
       console.log(resp);
     });
     this.obtenerListaOrdenes();
+  }
+
+  obtenerListas() {
+    this.obtenerListaUsuario();
+  }
+
+  obtenerListaUsuario() {
+    this.usuarioServicio.leerListaUsuario().subscribe((respuesta: any) => {
+      console.log(respuesta);
+      this.listaUsuario = respuesta.datos as Usuario[];
+      this.listaUsuario = this.listaUsuario.filter((item) => item.estado);
+    });
   }
 }

@@ -30,7 +30,7 @@ Se han usado los servidores web de AWS para mantener la app activa en la nube, y
 
 ## Contacto
 
-Creado por Elías Muñoz y de Juan M. Ariza • Si tienes alguna pregunta puedes contactarnos por medio de GitHub:
+Creado por Elías Muñoz y Juan M. Ariza • Si tienes alguna pregunta puedes contactarnos por medio de GitHub:
 
 - [Elias Muñoz](https://github.com/stardatcom)
 - [Juan Manuel Ariza](https://github.com/JuanArz2)

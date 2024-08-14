@@ -11,7 +11,7 @@ import {
   FormControlName,
   AbstractControl,
 } from '@angular/forms';
-import { ToastrService } from "ngx-toastr";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-admin-users',
@@ -25,8 +25,8 @@ export class AdminUsersComponent {
   formulario: FormGroup = new FormGroup({});
   formularioEnviado: boolean = false;
   nuevoUsuario: boolean = true;
-  tiposRol:string[]=["Admin","Colaborador"]
-  
+  tiposRol: string[] = ['Admin', 'Colaborador'];
+
   toastrService = inject(ToastrService);
 
   constructor(private usuarioServicio: ListaUsuarioService) {}
@@ -38,7 +38,7 @@ export class AdminUsersComponent {
 
   obtenerListaUsuario() {
     this.usuarioServicio.leerListaUsuario().subscribe((respuesta: any) => {
-      console.log(respuesta);
+      /* console.log(respuesta); */
       this.listaUsuario = respuesta.datos as Usuario[];
     });
   }
@@ -80,11 +80,10 @@ export class AdminUsersComponent {
     usuario.rolID = this.formulario.get('rol')?.value;
     usuario.estado = this.formulario.get('estado')?.value;
     usuario.ID = usuario.nombre + ' ' + usuario.email;
-    debugger;
     await this.usuarioServicio
       .crearUsuario(usuario)
       .then((resp: any) => {
-        console.log(resp);
+        /* console.log(resp); */
         if (resp) {
           if (resp.resultado == 'mal') {
             return;
@@ -97,7 +96,7 @@ export class AdminUsersComponent {
         }
       })
       .catch((error) => {
-        console.log('error ', error);
+        /* console.log('error ', error); */
       });
   }
 
@@ -118,11 +117,11 @@ export class AdminUsersComponent {
     usuario.rolID = this.formulario.get('rol')?.value;
     usuario.estado = this.formulario.get('estado')?.value;
     usuario._id = this.formulario.get('id')?.value;
-    console.log(usuario);
+    /* console.log(usuario); */
     await this.usuarioServicio
       .actualizarUsuario(usuario)
       .then((resp: any) => {
-        console.log(resp);
+        /* console.log(resp); */
         if (resp) {
           if (resp.resultado == 'mal') {
             return;
@@ -134,7 +133,7 @@ export class AdminUsersComponent {
         }
       })
       .catch((error) => {
-        console.log('error ', error);
+        /* console.log('error ', error); */
       });
   }
 

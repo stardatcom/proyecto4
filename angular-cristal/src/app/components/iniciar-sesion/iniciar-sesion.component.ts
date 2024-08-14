@@ -37,11 +37,11 @@ export class IniciarSesionComponent {
         };
 
         this.loginService.login(credential).subscribe((res: any) => {
-          console.log('response: ', res);
+          /* console.log('response: ', res); */
           if (res.resultado === 'bien') {
             localStorage.setItem('token', res.datos.token.token);
             localStorage.setItem('rol', res.datos.rolID);
-            this.cerrarModal()
+            this.cerrarModal();
             this.router.navigateByUrl('/inicio');
           } else {
             this.toastrService.error('Credenciales invalidas.', '', {

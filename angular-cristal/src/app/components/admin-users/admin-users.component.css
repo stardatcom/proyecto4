@@ -1,9 +1,9 @@
 .background-sesion {
-    background-image: url("../../../assets/images/bdab.webp");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    width: 100%;
-    height: 100vh;
-  }
+  background-image: url("../../../assets/images/bdab.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  width: 100%;
+  height: 81.8vh;
+}

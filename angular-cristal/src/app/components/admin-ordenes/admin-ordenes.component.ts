@@ -25,9 +25,8 @@ import { ToastrService } from 'ngx-toastr';
   providers: [LoginService],
 })
 export class AdminOrdenesComponent {
-
   toastrService = inject(ToastrService);
-  
+
   listaOrdenes: OrdenDeTrabajo[] = [];
   formulario: FormGroup = new FormGroup({});
   formularioEnviado: boolean = false;
@@ -51,7 +50,7 @@ export class AdminOrdenesComponent {
 
   obtenerListaOrdenes() {
     this.ordenesServicio.leerListaOrdenes().subscribe((respuesta: any) => {
-      console.log(respuesta);
+      /* console.log(respuesta); */
       this.listaOrdenes = respuesta.datos as OrdenDeTrabajo[];
     });
   }
@@ -90,7 +89,7 @@ export class AdminOrdenesComponent {
     await this.ordenesServicio
       .crearOrden(ordenes)
       .then((resp: any) => {
-        console.log(resp);
+        /* console.log(resp); */
         if (resp) {
           if (resp.resultado == 'mal') {
             return;
@@ -103,7 +102,7 @@ export class AdminOrdenesComponent {
         });
       })
       .catch((error) => {
-        console.log('error ', error);
+        /* console.log('error ', error); */
       });
   }
 
@@ -117,20 +116,20 @@ export class AdminOrdenesComponent {
   }
 
   async eliminarOrden(ordenID: string) {
-    let confirmation = confirm("¿Desea ELIMINAR la orden definitivamente?");
+    let confirmation = confirm('¿Desea ELIMINAR la orden definitivamente?');
     if (confirmation) {
-    await this.ordenesServicio.deleteOrden(ordenID).then((resp) => {
-      console.log(resp);
-    });
-    this.obtenerListaOrdenes();
-    this.toastrService.success('Orden eliminada.', '', {
-      positionClass: 'toast-bottom-center',
-    });
-  } else {
-    this.toastrService.info('NO se ha ELIMINADO la orden.', '', {
-      positionClass: 'toast-bottom-center',
-    });
-  }
+      await this.ordenesServicio.deleteOrden(ordenID).then((resp) => {
+        /* console.log(resp); */
+      });
+      this.obtenerListaOrdenes();
+      this.toastrService.success('Orden eliminada.', '', {
+        positionClass: 'toast-bottom-center',
+      });
+    } else {
+      this.toastrService.info('NO se ha ELIMINADO la orden.', '', {
+        positionClass: 'toast-bottom-center',
+      });
+    }
   }
 
   obtenerListas() {
@@ -139,7 +138,7 @@ export class AdminOrdenesComponent {
 
   obtenerListaUsuario() {
     this.usuarioServicio.leerListaUsuario().subscribe((respuesta: any) => {
-      console.log(respuesta);
+      /* console.log(respuesta); */
       this.listaUsuario = respuesta.datos as Usuario[];
       this.listaUsuario = this.listaUsuario.filter((item) => item.estado);
     });

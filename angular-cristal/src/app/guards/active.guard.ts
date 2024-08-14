@@ -15,7 +15,7 @@ export const activateGuard: CanActivateFn = (route, state) => {
     loginService.getRol().toLowerCase() == 'admin' ||
     loginService.getRol().toLowerCase() == 'administrador';
   const path: string = state.url.replace('/', '');
-  console.log('path guard', path);
+  //console.log('path guard', path);
 
   let pathValid: boolean = false;
 

@@ -14,7 +14,7 @@ export class LoginService {
 
   constructor(private toastrService: ToastrService) {}
 
-  API_URL = 'http://localhost:2000/iniciar-sesion';
+  API_URL = 'http://3.141.18.123:2000/iniciar-sesion';
 
   login(credential: Credential) {
     return this.httpClient.post(this.API_URL, credential);
@@ -33,18 +33,18 @@ export class LoginService {
   }
 
   logout() {
-    let confirmation = confirm("¿Desea cerrar sesión?");
+    let confirmation = confirm('¿Desea cerrar sesión?');
     if (confirmation) {
-    localStorage.removeItem('token');
-    this.router.navigate(['/iniciar-sesion']);
-    this.toastrService.success('¡Hasta luego!', '', {
-      positionClass: 'toast-bottom-center',
-    });
-  } else {
-    this.toastrService.info('NO ha CERRADO sesión.', '', {
-      positionClass: 'toast-bottom-center',
-    });
-  }
+      localStorage.removeItem('token');
+      this.router.navigate(['/iniciar-sesion']);
+      this.toastrService.success('¡Hasta luego!', '', {
+        positionClass: 'toast-bottom-center',
+      });
+    } else {
+      this.toastrService.info('NO ha CERRADO sesión.', '', {
+        positionClass: 'toast-bottom-center',
+      });
+    }
   }
 
   getRol(): string {
